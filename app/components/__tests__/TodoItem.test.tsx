@@ -110,6 +110,29 @@ describe("TodoItem Component", () => {
   // EJERCICIO 1: Completa el siguiente test para verificar que el componente
   // muestra correctamente el texto de una tarea con caracteres especiales
   it("renderiza correctamente una tarea con caracteres especiales", () => {
+
+    //Prepare
+    const mockOnToggle = jest.fn();
+    const mockOnDelete = jest.fn();
+
+    const propsMock = {
+      id: 1,
+      text: "Tarea con caññracteres especiales",
+      completed: false,
+      onToggle: mockOnToggle,
+      onDelete: mockOnDelete,
+      dataTestId: "todo-item-1",
+
+    };
+
+    //Execute
+
+    render(<TodoItem {... propsMock}/>); 
+
+    //Validate
+
+    expect(screen.getByTestId("todo-item-1")).toHaveTextContent("Tarea con caññracteres especiales");
+
     // TODO: Implementar el test siguiendo el patrón Prepare, Execute, Validate
     // Pista: Debes verificar que caracteres como &, <, >, ", etc. se muestren correctamente
   });

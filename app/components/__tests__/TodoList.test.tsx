@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import TodoList, { Todo } from "../TodoList";
 
 describe("TodoList Component", () => {
@@ -55,6 +55,29 @@ describe("TodoList Component", () => {
   // EJERCICIO 3: Completa el siguiente test para verificar que el componente
   // maneja correctamente los eventos de toggle y delete para cada tarea
   it("pasa correctamente las funciones onToggle y onDelete a cada TodoItem", () => {
+
+    //Prepare
+    const mockOnToggle = jest.fn();
+    const mockOnDelete = jest.fn();
+
+    //Execute
+    
+    const todos: Todo[] = [ {
+      id: 1,
+      text: "Tarea 1",
+      completed: false,
+    }];
+
+     render(<TodoList todos={todos} onToggleTodo={mockOnToggle} onDeleteTodo={mockOnDelete} />);
+
+
+
+    //Validate
+    expect(screen.getByTestId("todo-item-1")).toBeInTheDocument();
+    expect(screen.getByTestId("todo-item-1")).toHaveTextContent("Tarea 1");
+
+  
+
     // TODO: Implementar el test siguiendo el patrón Prepare, Execute, Validate
     // Pista: Deberás modificar el mock de TodoItem para verificar que recibe las props correctas
   });
